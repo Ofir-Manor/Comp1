@@ -29,7 +29,7 @@ enum tokentype {
     LBRACE = 25,
     RBRACE = 26,
     ASSIGN = 27,
-    RELOP = 28
+    RELOP = 28,
     BINOP = 29,
     COMMENT = 30,
     ID = 31,

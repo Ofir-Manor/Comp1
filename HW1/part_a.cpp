@@ -7,7 +7,7 @@ int main()
 {
     int token;
     while((token = yylex())) {
-        printf("%d %s %s", yylineno, token_name(token) , yytext);
+        printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
     }
     return 0;
 }
@@ -114,6 +114,9 @@ string token_name(int token)
 
         case STRING:
             return "STRING";
+
+        default:
+            return "Unknown Token";
     }
 
 }

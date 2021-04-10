@@ -8,8 +8,8 @@
 WS ([ \t\r\n])
 LETTER ([a-zA-Z])
 DIGIT ([0-9])
-RELATIONOP ( == | != | < | > | <= | >= )
-BINARYOP ( \+ | - | \* | / )
+RELATIONOP ([==|!=|<|>|<=|>=])
+BINARYOP ([\+|-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 
 %%
@@ -36,18 +36,18 @@ default {return DEFAULT;}
 : {return COLON;}
 ; {return SC;}
 , {return COMMA;}
-( {return LPAREN;}
-) {return RPAREN;}
+\( {return LPAREN;}
+\) {return RPAREN;}
 { {return LBRACE;}
 } {return RBRACE;}
 = {return ASSIGN;}
 {RELATIONOP} {return RELOP;}
 {BINARYOP} {return BINOP;}
-//.* {return COMMENT;}
+\/\/.* {return COMMENT;}
 {DIGIT}+ {return NUM;}
 {ID} {return ID;}
-{WS} {/*ignore*/}
-. {return -1 /*error*/}
+{WS} { /* ignore */ }
+. {return -1; /* error */ }
 
 %%
 
