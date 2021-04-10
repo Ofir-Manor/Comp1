@@ -1,18 +1,17 @@
 #include "tokens.hpp"
 #include <string>
 
-string token_name(tokentype token);
+string token_name(int token);
 int main()
 {
     int token;
     while((token = yylex())) {
-        printf("%d %s %s", yylineno(), , yylex());
-
+        printf("%d %s %s", yylineno(), token_name(token) , yylex());
     }
     return 0;
 }
 
-string token_name(tokentype token)
+string token_name(int token)
 {
     switch (token)
     {
