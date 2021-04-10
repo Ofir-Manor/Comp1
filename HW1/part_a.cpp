@@ -1,12 +1,13 @@
 #include "tokens.hpp"
 #include <string>
+using namespace std;
 
 string token_name(int token);
 int main()
 {
     int token;
     while((token = yylex())) {
-        printf("%d %s %s", yylineno(), token_name(token) , yylex());
+        printf("%d %s %s", yylineno, token_name(token) , yytext);
     }
     return 0;
 }
@@ -103,7 +104,7 @@ string token_name(int token)
             return "BINOP";
 
         case COMMENT:
-            return "COMMENT":
+            return "COMMENT";
 
         case ID:
             return "ID";

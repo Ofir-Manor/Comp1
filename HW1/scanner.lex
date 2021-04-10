@@ -43,8 +43,8 @@ default {return DEFAULT;}
 = {return ASSIGN;}
 {RELATIONOP} {return RELOP;}
 {BINARYOP} {return BINOP;}
-{//.*} {return COMMENT;}
-{digit+} {return NUM;}
+//.* {return COMMENT;}
+{DIGIT}+ {return NUM;}
 {ID} {return ID;}
 {WS} {/*ignore*/}
 . {return -1 /*error*/}

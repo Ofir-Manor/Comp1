@@ -1,6 +1,7 @@
 #ifndef TOKENS_HPP_
 #define TOKENS_HPP_
-#include enum tokentype {
+#include <cstdlib>
+enum tokentype {
     VOID = 1,
     INT = 2,
     BYTE = 3,
