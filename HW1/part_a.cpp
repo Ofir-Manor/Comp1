@@ -10,13 +10,14 @@ int main()
     while((token = yylex())) {
         if (token == -1)
         {
-            printf("Unknows token found in line %d with the text %s", yylineno, yytext);
+            printf("Unknown token found in line %d with the text %s", yylineno, yytext);
             continue;
         }
         if (token == STRING)
         {
-            do something
-            print it
+            string print_lexeme = lexeme_string(yytext);
+            printf("%d %s %s \n", yylineno, token_name(token).c_str(), print_lexeme.c_str());
+            continue;
         }
 
         printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
@@ -30,10 +31,60 @@ string lexeme_string(char * lexeme)
 {
     string print_lexeme;
     char* index = lexeme;
+    int cont;
 
     while (*index != '\0')
     {
-        
+        cont = 1;
+        if(*index == '\\')
+        {
+            switch (*(index+1))
+            {
+                case '0':
+                    cont = 0;
+                    *index = '\0';
+                    break;
+
+                case 't':
+                    cont = 2;
+                    print_lexeme += '\t';
+                    break;
+
+                case 'r':
+                    cont = 2;
+                    print_lexeme += '\r';
+                    break;
+
+                case 'n':
+                    cont = 2;
+                    print_lexeme += '\n';
+                    break;
+
+                case '"':
+                    cont = 2;
+                    print_lexeme += '"';
+                    break;
+
+                case '\\':
+                    cont = 2;
+                    print_lexeme += '\\';
+                    break;
+
+                case 'x':
+                    string hex;
+                    hex += (*(index+2));
+                    hex += (*(index+3));
+                    int hex_val = stoi(hex, 0, 16);
+                    print_lexeme += hex_val;
+                    cont = 4;
+                    break;
+            }
+        }
+        else
+        {
+            print_lexeme += (*index);
+        }
+        index += cont;
     }
 }
 
