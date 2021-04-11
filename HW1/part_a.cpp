@@ -3,15 +3,41 @@
 using namespace std;
 
 string token_name(int token);
+string lexeme_string(char* lexeme);
 int main()
 {
     int token;
     while((token = yylex())) {
+        if (token == -1)
+        {
+            printf("Unknows token found in line %d with the text %s", yylineno, yytext);
+            continue;
+        }
+        if (token == STRING)
+        {
+            do something
+            print it
+        }
+
         printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
     }
     return 0;
 }
 
+
+//Transforms the lexeme of a string into a printable string
+string lexeme_string(char * lexeme)
+{
+    string print_lexeme;
+    char* index = lexeme;
+
+    while (*index != '\0')
+    {
+        
+    }
+}
+
+//Returns the token type
 string token_name(int token)
 {
     switch (token)
