@@ -1,5 +1,4 @@
 %{
-#include <maths.h>
 #include "tokens.hpp"
 %}
 
@@ -13,8 +12,10 @@ HEXDIGIT ([0-9A-F])
 RELATIONOP ([==|!=|<|>|<=|>=])
 BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
-CHARACTER ([ -~|\t|\n|\r])
-ESCAPESEQ ([\\|\"|\0|\x{HEXDIGIT}{HEXDIGIT}]}
+CHARACTER ([ -~])
+COMMENTCHAR ([ -~|\t])
+STRING (\"{CHARACTER}*\")
+ESCAPESEQ ([\\\\|\"|\0|\x{HEXDIGIT}{HEXDIGIT}]}
 
 %%
 
@@ -47,10 +48,10 @@ default {return DEFAULT;}
 = {return ASSIGN;}
 {RELATIONOP} {return RELOP;}
 {BINARYOP} {return BINOP;}
-\/\/({CHARACTER}^(\n))* {return COMMENT;}
+\/\/{COMMENTCHAR}* {return COMMENT;}
 {DIGIT}+ {return NUM;}
 {ID} {return ID;}
-"([{CHARACTER}|{WS}|{ESCAPESEQ}]^[\|"])*" {return STRING;}
+{STRING} {return STRING;}
 {WS} { /* ignore */ }
 . {return -1; /* error */ }
 

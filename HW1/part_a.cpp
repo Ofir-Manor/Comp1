@@ -10,14 +10,22 @@ int main()
     while((token = yylex())) {
         if (token == -1)
         {
-            printf("Unknown token found in line %d with the text %s", yylineno, yytext);
+            printf("Unknown token found in line %d with the text %s\n", yylineno, yytext);
             continue;
         }
+
         if (token == STRING)
         {
-            string print_lexeme = lexeme_string(yytext);
-            printf("%d %s %s \n", yylineno, token_name(token).c_str(), print_lexeme.c_str());
-            continue;
+            int i =0;
+            while (*yytext != '\0')
+            {
+                printf("%d : %c \n", i, *yytext);
+                yytext++;
+                i++;
+            }
+          //  string print_lexeme = lexeme_string(yytext);
+          //  printf("%d %s %s \n", yylineno, token_name(token).c_str(), print_lexeme.c_str());
+          //  continue;
         }
 
         printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
@@ -78,6 +86,13 @@ string lexeme_string(char * lexeme)
                     print_lexeme += hex_val;
                     cont = 4;
                     break;
+
+                case '\0':
+                    //send error end
+                    break;
+
+                default:
+                    //send error bad escape sequence
             }
         }
         else
@@ -86,6 +101,7 @@ string lexeme_string(char * lexeme)
         }
         index += cont;
     }
+    return print_lexeme;
 }
 
 //Returns the token type
