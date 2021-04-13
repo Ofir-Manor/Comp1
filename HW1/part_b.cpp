@@ -89,7 +89,7 @@ int main()
                 }
                 else
                 {
-                    printf("Error: ")
+                    printf("Error: %s\n", token_name(token));
                 }
         }
 
