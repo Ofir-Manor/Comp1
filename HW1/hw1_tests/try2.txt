@@ -1,0 +1,22 @@
+2 COMMENT // Hello world program
+4 INT int
+4 ID main
+4 LPAREN (
+4 RPAREN )
+4 LBRACE {
+5 ID print
+5 LPAREN (
+5 STRING "Hello world!"
+5 RPAREN )
+5 SC ;
+6 ID print
+6 LPAREN (
+6 STRING "Nice,
+isn't
+it?"
+6 RPAREN )
+6 SC ;
+7 RETURN return
+7 NUM 0
+7 SC ;
+8 RBRACE }

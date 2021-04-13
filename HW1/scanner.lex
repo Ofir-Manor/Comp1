@@ -14,7 +14,7 @@ BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 CHARACTER ([ -~])
 COMMENTCHAR ([ -~|\t])
-STRING (\"{CHARACTER}*\")
+STRING (\"([^\\\"]|\\.)*\")
 ESCAPESEQ ([\\\\|\"|\0|\x{HEXDIGIT}{HEXDIGIT}]}
 
 %%
@@ -43,8 +43,8 @@ default {return DEFAULT;}
 , {return COMMA;}
 \( {return LPAREN;}
 \) {return RPAREN;}
-{ {return LBRACE;}
-} {return RBRACE;}
+\{ {return LBRACE;}
+\} {return RBRACE;}
 = {return ASSIGN;}
 {RELATIONOP} {return RELOP;}
 {BINARYOP} {return BINOP;}

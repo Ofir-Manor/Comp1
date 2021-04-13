@@ -14,21 +14,38 @@ int main()
             continue;
         }
 
+     //   char* content;
         if (token == STRING)
         {
-            int i =0;
-            while (*yytext != '\0')
-            {
-                printf("%d : %c \n", i, *yytext);
-                yytext++;
-                i++;
-            }
+            int index = 1;
+            char* str = new char[yyleng];
+            printf("%d %s ", yylineno, token_name(token).c_str());
+            printf("%s", lexeme_string(yytext).c_str());
+            //while(index<yyleng-1)
+            //{
+            //    printf("%c", yytext[index]);
+            //    index++;
+            //}
+            printf("\n");
+          
+       //     content = str;
+        //    printf(*yytext);
+            //int i =0;
+            //while (*yytext != '\0')
+            //{
+            //    printf("%d : %c \n", i, *yytext);
+            //    yytext++;
+            //    i++;
+            //}
           //  string print_lexeme = lexeme_string(yytext);
           //  printf("%d %s %s \n", yylineno, token_name(token).c_str(), print_lexeme.c_str());
           //  continue;
         }
+        else
+        {
+            printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
+        }
 
-        printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
     }
     return 0;
 }
@@ -38,10 +55,10 @@ int main()
 string lexeme_string(char * lexeme)
 {
     string print_lexeme;
-    char* index = lexeme;
+    char* index = lexeme+1;
     int cont;
 
-    while (*index != '\0')
+    while (*(index+1) != '\0')
     {
         cont = 1;
         if(*index == '\\')
@@ -86,13 +103,6 @@ string lexeme_string(char * lexeme)
                     print_lexeme += hex_val;
                     cont = 4;
                     break;
-
-                case '\0':
-                    //send error end
-                    break;
-
-                default:
-                    //send error bad escape sequence
             }
         }
         else
