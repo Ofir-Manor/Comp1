@@ -9,7 +9,7 @@ int main()
     while((token = yylex())) {
         if (token == -1)
         {
-            printf("Unknown token found in line %d with the text %s\n", yylineno, yytext);
+            printf("Error %s\n", yytext);
             continue;
         }
 
