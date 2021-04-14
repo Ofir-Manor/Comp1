@@ -82,7 +82,7 @@ int main()
                 }
                 else
                 {
-                    printf("Error: Bad Expression, i got %d\n",paren_stack.top());
+                    printf("Error: Bad Expression\n");
                     exit(0);
                 }
 
@@ -99,6 +99,10 @@ int main()
                 }
         }
 
+    }
+    if(paren_stack.size() != 0)
+    {
+        printf("Error: Bad Expression\n");
     }
     return 0;
 }
