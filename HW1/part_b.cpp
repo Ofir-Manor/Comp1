@@ -1,9 +1,10 @@
 #include "tokens.hpp"
 #include <stack>
 #include <string>
+using namespace std;
 
 string token_name(int token);
-using namespace std;
+
 int main()
 {
     int token;
@@ -30,6 +31,8 @@ int main()
             case RPAREN:
                 if (paren_stack.top() == LPAREN)
                 {
+                    spaces--;
+
                     for (i = 0; i < spaces; i ++)
                     {
                         printf("\t");
@@ -37,15 +40,13 @@ int main()
 
                     printf(")\n");
 
-                    spaces--;
-
                     paren_stack.pop();
 
                     break;
                 }
                 else
                 {
-                    printf("Error: Bad Expression\n")
+                    printf("Error: Bad Expression\n");
                     exit(0);
                 }
 
@@ -59,13 +60,15 @@ int main()
 
                 spaces++;
 
-                paren_stack.push(LPAREN);
+                paren_stack.push(LBRACE);
 
                 break;
 
             case RBRACE:
                 if (paren_stack.top() == LBRACE)
                 {
+                    spaces--;
+
                     for (i = 0; i < spaces; i ++)
                     {
                         printf("\t");
@@ -73,15 +76,13 @@ int main()
 
                     printf("}\n");
 
-                    spaces--;
-
                     paren_stack.pop();
 
                     break;
                 }
                 else
                 {
-                    printf("Error: Bad Expression\n")
+                    printf("Error: Bad Expression, i got %d\n",paren_stack.top());
                     exit(0);
                 }
 
@@ -89,10 +90,12 @@ int main()
                 if (token == -1)
                 {
                     printf("Error: %s\n", yytext);
+                    exit(0);
                 }
                 else
                 {
-                    printf("Error: %s\n", token_name(token));
+                    printf("Error: %s\n", token_name(token).c_str());
+                    exit(0);
                 }
         }
 
