@@ -89,7 +89,7 @@ int main()
             default:
                 if (token == -1)
                 {
-                    printf("Error: %s\n", yytext);
+                    printf("Error %s\n", yytext);
                     exit(0);
                 }
                 else

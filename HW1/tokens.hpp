@@ -35,7 +35,8 @@ enum tokentype {
     COMMENT = 30,
     ID = 31,
     NUM = 32,
-    STRING = 33
+    STRING = 33,
+    UNCLOSED_STRING = 34
 };
 
 
