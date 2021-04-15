@@ -4,19 +4,15 @@
 
 %option yylineno
 %option noyywrap
-SPACES ([ \t])
 WS ([ \t\r\n])
 LETTER ([a-zA-Z])
 DIGIT ([0-9])
-HEXDIGIT ([0-9A-F])
 RELATIONOP ([==|!=|<|>|<=|>=])
 BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 CHARACTER ([ -~])
 COMMENTCHAR ([ -~|\t])
 STRING (\"{CHARACTER}*) 
-ESCAPESEQ ([\\\\|\"|\0|\x{HEXDIGIT}{HEXDIGIT}]}
-
 %%
 
 void {return VOID;}
@@ -49,7 +45,7 @@ default {return DEFAULT;}
 {RELATIONOP} {return RELOP;}
 {BINARYOP} {return BINOP;}
 \/\/{COMMENTCHAR}* {return COMMENT;}
-{DIGIT}+ {return NUM;}
+(0|[1-9]{DIGIT}*) {return NUM;}
 {ID} {return ID;}
 {STRING} {return STRING;}
 {WS} { /* ignore */ }

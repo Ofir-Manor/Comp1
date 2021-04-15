@@ -27,8 +27,6 @@ int main()
 		}
         if (token == STRING)
         {
-            int index = 1;
-            char* str = new char[yyleng];
             printf("%d %s %s\n", yylineno, token_name(token).c_str(),lexeme_string(yytext).c_str());
         }
         else
