@@ -12,7 +12,7 @@ BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 CHARACTER ([ -~])
 COMMENTCHAR ([ -~|\t])
-STRING (\"{CHARACTER}*) 
+STRING (\"{CHARACTER}*\") 
 %%
 
 void {return VOID;}

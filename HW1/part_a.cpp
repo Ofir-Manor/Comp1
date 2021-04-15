@@ -1,5 +1,6 @@
 #include "tokens.hpp"
 #include <string>
+#include <string.h>
 using namespace std;
 
 string text;
@@ -17,7 +18,11 @@ int main()
     while((token = yylex())) {
         if (token == -1)
         {
-            printf("Error %s\n", yytext);
+            if(strcmp(yytext, "\"") == 0 )
+            {
+              printf("Error unclosed string\n");
+            }
+            else printf("Error %s\n", yytext);
             exit(0);
         }
 		if(token == COMMENT)
@@ -152,7 +157,7 @@ string lexeme_string(char * lexeme)
     string print_lexeme;
     char* index = lexeme+1;
     int cont;
-    if(*(lexeme+yyleng-1)!='"'||*(lexeme+yyleng-2)=='\\')
+    if(*(lexeme+yyleng-2)=='\\')
     {
       printf("Error unclosed string\n");
       exit(0); 
