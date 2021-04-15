@@ -1,7 +1,5 @@
 
-<!-- saved from url=(0120)https://grades.cs.technion.ac.il/grades.cgi?dbjadjaca18014a449f3d0138067dd+2+236360+Spring2021+hw/WCFiles/selfcheck+1749 -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body>#!/bin/bash
-
+#!/bin/bash
 # change these per each homework
 #	link to tests:
 testsurl="https://webcourse.cs.technion.ac.il/fc159753hw_236360_202002/hw/WCFiles/hw1-tests.zip"

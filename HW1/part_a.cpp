@@ -2,8 +2,15 @@
 #include <string>
 using namespace std;
 
+string text;
 string token_name(int token);
 string lexeme_string(char* lexeme);
+
+static bool isHexa(char let)
+{
+  return ((let>='0'&&let<='9')||(let>='a'&&let<='f')||(let>='A'&&let<='F'));
+}
+
 int main()
 {
     int token;
@@ -13,37 +20,20 @@ int main()
             printf("Error %s\n", yytext);
             exit(0);
         }
-
-     //   char* content;
+		if(token == COMMENT)
+		{
+			printf("%d %s //\n", yylineno, token_name(token).c_str());
+			continue;
+		}
         if (token == STRING)
         {
             int index = 1;
             char* str = new char[yyleng];
-            printf("%d %s ", yylineno, token_name(token).c_str());
-            printf("%s", lexeme_string(yytext).c_str());
-            //while(index<yyleng-1)
-            //{
-            //    printf("%c", yytext[index]);
-            //    index++;
-            //}
-            printf("\n");
-          
-       //     content = str;
-        //    printf(*yytext);
-            //int i =0;
-            //while (*yytext != '\0')
-            //{
-            //    printf("%d : %c \n", i, *yytext);
-            //    yytext++;
-            //    i++;
-            //}
-          //  string print_lexeme = lexeme_string(yytext);
-          //  printf("%d %s %s \n", yylineno, token_name(token).c_str(), print_lexeme.c_str());
-          //  continue;
+            printf("%d %s %s\n", yylineno, token_name(token).c_str(),lexeme_string(yytext).c_str());
         }
         else
         {
-            printf("%d %s %s \n", yylineno, token_name(token).c_str() , yytext);
+            printf("%d %s %s\n", yylineno, token_name(token).c_str() , yytext);
         }
 
     }
@@ -164,7 +154,11 @@ string lexeme_string(char * lexeme)
     string print_lexeme;
     char* index = lexeme+1;
     int cont;
-
+    if(*(lexeme+yyleng-1)!='"'||*(lexeme+yyleng-2)=='\\')
+    {
+      printf("Error unclosed string\n");
+      exit(0); 
+    }
     while (*(index+1) != '\0')
     {
         cont = 1;
@@ -203,6 +197,14 @@ string lexeme_string(char * lexeme)
                     break;
 
                 case 'x':
+                {
+                    if((*(index+2)=='"'||!isHexa(*(index+2)))||
+                    (*(index+3)=='"'||!isHexa(*(index+3))))
+                    {
+                      printf("Error undefined escape sequence x%c%c\n",*(index+2),*(index+3));
+                      exit(0);
+                    }
+                    
                     string hex;
                     hex += (*(index+2));
                     hex += (*(index+3));
@@ -210,6 +212,11 @@ string lexeme_string(char * lexeme)
                     print_lexeme += hex_val;
                     cont = 4;
                     break;
+                }
+                    
+                default:
+                  printf("Error undefined escape sequence %c\n", *(index+1));
+                  exit(0);
             }
         }
         else

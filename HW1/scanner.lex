@@ -14,7 +14,7 @@ BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 CHARACTER ([ -~])
 COMMENTCHAR ([ -~|\t])
-STRING (\"([^\\\"]|\\.)*\")
+STRING (\"{CHARACTER}*) 
 ESCAPESEQ ([\\\\|\"|\0|\x{HEXDIGIT}{HEXDIGIT}]}
 
 %%
