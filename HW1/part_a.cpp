@@ -11,7 +11,7 @@ int main()
         if (token == -1)
         {
             printf("Error %s\n", yytext);
-            continue;
+            exit(0);
         }
 
      //   char* content;
