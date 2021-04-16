@@ -212,6 +212,11 @@ string lexeme_string(char * lexeme)
                     hex += (*(index+2));
                     hex += (*(index+3));
                     int hex_val = stoi(hex, 0, 16);
+                    if((hex_val < 0x00) || (hex_val > 0x7F))
+                    {
+                      printf("Error undefined escape sequence x%c%c\n",*(index+2),*(index+3));
+                      exit(0);
+                    }
                     print_lexeme += hex_val;
                     cont = 4;
                     break;
