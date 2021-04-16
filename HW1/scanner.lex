@@ -7,7 +7,7 @@
 WS ([ \t\r\n])
 LETTER ([a-zA-Z])
 DIGIT ([0-9])
-RELATIONOP ([==|!=|<|>|<=|>=])
+RELATIONOP ([(==)|(!=)|<|>|(<=)|(>=)])
 BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
 CHARACTER ([ -~])
