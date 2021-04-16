@@ -10,7 +10,7 @@ DIGIT ([0-9])
 RELATIONOP ((==)|(!=)|<|>|(<=)|(>=))
 BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
-STRINGCHAR ([ -!|#-~])
+STRINGCHAR ([ -!#-~]|(\t))
 COMMENTCHAR ([ -~|\t])
 STRING (\"({STRINGCHAR}|(\\\"))*\") 
 %%

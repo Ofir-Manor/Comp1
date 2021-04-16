@@ -157,20 +157,22 @@ string lexeme_string(char * lexeme)
     string print_lexeme;
     char* index = lexeme+1;
     int cont;
-    if(*(lexeme+yyleng-2)=='\\')
+
+    while (*(index) != '"')
     {
-      printf("Error unclosed string\n");
-      exit(0); 
-    }
-    while (*(index+1) != '\0')
-    {
+        if(*(index) == '\0')
+        {
+          printf("Error unclosed string\n");
+          exit(0);
+        }
+        
         cont = 1;
         if(*index == '\\')
         {
             switch (*(index+1))
             {
                 case '0':
-                    cont = 0;
+                    cont = 2;
                     *index = '\0';
                     break;
 
@@ -201,8 +203,17 @@ string lexeme_string(char * lexeme)
 
                 case 'x':
                 {
-                    if((*(index+2)=='"'||!isHexa(*(index+2)))||
-                    (*(index+3)=='"'||!isHexa(*(index+3))))
+                    if((*(index+2)=='"'))
+                    {
+                      printf("Error undefined escape sequence x\n");
+                      exit(0);
+                    }
+                    if(*(index+3)=='"')
+                    {
+                      printf("Error undefined escape sequence x%c\n",*(index+2));
+                      exit(0);
+                    }
+                    if((!isHexa(*(index+2))) || (!isHexa(*(index+3))))
                     {
                       printf("Error undefined escape sequence x%c%c\n",*(index+2),*(index+3));
                       exit(0);
