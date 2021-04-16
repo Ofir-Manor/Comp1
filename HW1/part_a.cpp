@@ -3,7 +3,6 @@
 #include <string.h>
 using namespace std;
 
-string text;
 string token_name(int token);
 string lexeme_string(char* lexeme);
 
@@ -27,6 +26,7 @@ int main()
         }
 		if(token == COMMENT)
 		{
+
 			printf("%d %s //\n", yylineno, token_name(token).c_str());
 			continue;
 		}
@@ -173,7 +173,7 @@ string lexeme_string(char * lexeme)
             {
                 case '0':
                     cont = 2;
-                    *index = '\0';
+                    print_lexeme += '\0';
                     break;
 
                 case 't':

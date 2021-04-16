@@ -29,6 +29,13 @@ int main()
                 break;
 
             case RPAREN:
+            
+                if(paren_stack.size() == 0)
+                {
+                  printf("Error: Bad Expression\n");
+                  exit(0);
+                }
+                
                 if (paren_stack.top() == LPAREN)
                 {
                     spaces--;
@@ -65,6 +72,13 @@ int main()
                 break;
 
             case RBRACE:
+            
+                 if(paren_stack.size() == 0)
+                {
+                  printf("Error: Bad Expression\n");
+                  exit(0);
+                }
+                
                 if (paren_stack.top() == LBRACE)
                 {
                     spaces--;
