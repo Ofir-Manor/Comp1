@@ -7,13 +7,12 @@
 WS ([ \t\r\n])
 LETTER ([a-zA-Z])
 DIGIT ([0-9])
-<<<<<<< HEAD
 RELATIONOP ((==)|(!=)|<|>|(<=)|(>=))
 BINARYOP ([\+|\-|\*|/])
 ID {LETTER}({LETTER}|{DIGIT})*
-CHARACTER ([ -~])
+STRINGCHAR ([ -!|#-~])
 COMMENTCHAR ([ -~|\t])
-STRING (\"{CHARACTER}*\") 
+STRING (\"({STRINGCHAR}|(\\\"))*\") 
 %%
 
 void {return VOID;}
